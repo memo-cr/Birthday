@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <title>Background Slider</title>
+  </head>
+  <body>
+    <div class="outer">
+      <h1>
+        HAPPY BIRTHDAY <br />
+        Keci!!
+      </h1>
+      <div class="circle-container inner"></div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        xml:lang="en"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 500 500"
+        id="textcirclesvg"
+        class="responsive inner"
+      >
+        <title>Circular Text Path</title>
+        <defs>
+          <path
+            id="textcircle"
+            d="M250,400
+                       a150,150 0 0,1 0,-300a150,150 0 0,1 0,300Z"
+            transform="rotate(12,250,250)"
+          />
+        </defs>
+        <g class="textcircle" id="circle">
+          <text textLength="940">
+            <textPath
+              xlink:href="#textcircle"
+              aria-label="CSS & SVG are awesome"
+              textLength="940"
+            >
+              HAPPY BIRTHDAY HATICE | DRÜCK AUF DAS GESCHENK! |
+            </textPath>
+          </text>
+        </g>
+      </svg>
+
+      <div class="inner">
+        <i class="fas fa-gift gift-icon" id="gift-icon"></i>
+      </div>
+      <div class="hidden-image inner" id="hidden-image">
+        <img src="gift.jpg" alt="Surprise" />
+      </div>
+    </div>
+
+    <h1>
+      von <br />
+      abi
+    </h1>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+      // Add click event listener to the gift icon
+      document
+        .getElementById("gift-icon")
+        .addEventListener("click", function () {
+          const giftIcon = document.getElementById("gift-icon");
+          const hiddenImage = document.getElementById("hidden-image");
+          const circle = document.getElementById("circle");
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 },
+          });
+          // Add explosion effect by adding 'explode' class
+          giftIcon.classList.add("explode");
+          circle.classList.add("transform");
+
+          document.querySelector("#textcirclesvg>g>text>textPath").textContent =
+            "  YUHU DU HAST EIN IPHONE 13 MINI GEWONNEN!";
+          // After the explosion animation ends, show the hidden image and remove the icon
+          setTimeout(function () {
+            giftIcon.style.display = "none"; // Hide the icon
+            hiddenImage.style.display = "block"; // Show the image
+          }, 600); // Match the timing with the explosion animation duration
+        });
+    </script>
+  </body>
+</html>
